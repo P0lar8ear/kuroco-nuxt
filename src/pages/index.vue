@@ -1,11 +1,16 @@
 <template>
-  <h1>kuroco deploy test</h1>
+  <h1>kuroco deploy test🥷💭</h1>
 
   <v-container class="pa-6 pa-md-12">
     <h2>動的ルーティング</h2>
     <v-sheet class="mx-auto" width="300">
       <v-form ref="form" @submit.prevent="handleSubmit" @change="validateForm">
-        <v-text-field v-model="id" :rules="rules" label="id"></v-text-field>
+        <v-text-field
+          v-model="id"
+          :rules="rules"
+          label="id"
+          Number
+        ></v-text-field>
         <v-btn class="mt-2" type="submit" block :disabled="isSubmitDisabled"
           >Submit</v-btn
         >
