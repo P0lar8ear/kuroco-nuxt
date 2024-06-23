@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>kuroco deploy test</h1>
+    <h1>動的ルーティング test</h1>
     <v-btn>Button</v-btn>
   </div>
 </template>
