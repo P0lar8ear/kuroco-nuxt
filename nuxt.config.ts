@@ -1,6 +1,8 @@
 export default defineNuxtConfig({
   ssr: true,
-  target: "static",
+  nitro: {
+    preset: "static",
+  },
   srcDir: "src/",
   modules: ["@invictus.codes/nuxt-vuetify"],
   runtimeConfig: {
@@ -13,12 +15,6 @@ export default defineNuxtConfig({
       title: "kuroco deploy test🥷💭",
       meta: [{ name: "description", content: "kuroco CMS" }],
       link: [{ rel: "icon", href: "/favicon.ico" }],
-    },
-  },
-  nitro: {
-    prerender: {
-      routes: ["/"],
-      exclude: ["/api"], // /apiルートを除外する場合
     },
   },
 });
