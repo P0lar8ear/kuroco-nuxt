@@ -1,5 +1,5 @@
 export default defineNuxtConfig({
-  ssr: false,
+  ssr: true,
   srcDir: "src/",
   modules: ["@invictus.codes/nuxt-vuetify"],
   runtimeConfig: {
