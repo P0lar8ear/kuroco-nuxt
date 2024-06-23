@@ -1,7 +1,5 @@
 <template>
-  <div>
+  <v-container class="spacing-playground pa-6" fluid>
     <slot />
-  </div>
+  </v-container>
 </template>
-
-<script setup lang="ts"></script>

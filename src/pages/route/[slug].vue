@@ -1,8 +1,25 @@
 <template>
-  <div>
-    <h1>動的ルーティング test</h1>
-    <v-btn>Button</v-btn>
-  </div>
+  <v-container class="pa-6 pa-md-12">
+    <h2>動的ルーティングテスト</h2>
+    <v-sheet class="mx-auto" width="300">
+      <v-empty-state
+        headline="OK check!"
+        :title="`Page slug ${route.params.slug}`"
+        text="This is a page for testing dynamic routing."
+        image="https://vuetifyjs.b-cdn.net/docs/images/logos/v.png"
+      ></v-empty-state>
+    </v-sheet>
+    <v-btn variant="tonal" @click="goBack"> ← Back </v-btn>
+  </v-container>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useRoute, useRouter } from "vue-router";
+
+const route = useRoute();
+const router = useRouter();
+
+const goBack = () => {
+  router.push(`/`);
+};
+</script>
