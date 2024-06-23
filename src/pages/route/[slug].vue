@@ -1,9 +1,9 @@
 <template>
   <v-container class="pa-6 pa-md-12">
     <h2>動的ルーティングテスト</h2>
-    <v-sheet class="mx-auto" width="300">
+    <v-sheet class="mx-auto" width="500">
       <v-empty-state
-        headline="OK check!"
+        headline="clear"
         :title="`Page slug ${route.params.slug}`"
         text="This is a page for testing dynamic routing."
         image="https://vuetifyjs.b-cdn.net/docs/images/logos/v.png"
