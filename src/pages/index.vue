@@ -10,6 +10,7 @@
           :rules="rules"
           label="id"
           Number
+          type="number"
         ></v-text-field>
         <v-btn class="mt-2" type="submit" block :disabled="isSubmitDisabled"
           >Submit</v-btn
