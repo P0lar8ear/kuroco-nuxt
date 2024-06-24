@@ -11,7 +11,7 @@ export default defineNuxtConfig({
   modules: ["@invictus.codes/nuxt-vuetify"],
   runtimeConfig: {
     public: {
-      kurocoApiDomain: "https://kuroco.s35gyllt.net/",
+      kurocoApiDomain: "https://kuroco.s35gyllt.net",
     },
   },
   app: {
