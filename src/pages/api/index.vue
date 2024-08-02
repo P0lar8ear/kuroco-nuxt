@@ -23,8 +23,7 @@ import { useRoute, useRouter } from "vue-router";
 
 const config = useRuntimeConfig();
 const { data: EventResponse } = await useFetch(
-  `${config.public.kurocoApiDomain}/rcms-api/1/sample`,
-  { credentials: "include" }
+  `${config.public.kurocoApiDomain}/rcms-api/1/sample`
 );
 
 const route = useRoute();

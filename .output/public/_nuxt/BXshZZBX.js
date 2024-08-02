@@ -1,0 +1,1 @@
+import{_ as t,g as n,t as o,a0 as s,A as c,a4 as r}from"./CwUTqyWM.js";const _={};function l(e,f){const a=n("v-container");return o(),s(a,{class:"spacing-playground pa-6",fluid:""},{default:c(()=>[r(e.$slots,"default")]),_:3})}const p=t(_,[["render",l]]);export{p as default};
