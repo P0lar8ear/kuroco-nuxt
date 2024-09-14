@@ -2,7 +2,7 @@
   <h1>kuroco deploy test🥷💭</h1>
 
   <v-container class="pa-6 pa-md-12">
-    <h2>動的ルーティング</h2>
+    <h2>動的ルーティングサンプル</h2>
     <v-sheet class="mx-auto" width="300">
       <v-form ref="form" @submit.prevent="handleSubmit" @change="validateForm">
         <v-text-field
@@ -23,6 +23,13 @@
     <h2>API接続テスト</h2>
     <v-sheet class="mx-auto" width="300">
       <v-btn class="mt-2" type="submit" block @click="goAPI">go check</v-btn>
+    </v-sheet>
+  </v-container>
+
+  <v-container class="pa-6 pa-md-12">
+    <h2>API動的ルーティング</h2>
+    <v-sheet class="mx-auto" width="300">
+      <v-btn class="mt-2" type="submit" block @click="goRoute">go check</v-btn>
     </v-sheet>
   </v-container>
 </template>
@@ -62,6 +69,10 @@ export default defineComponent({
       router.push(`/api/`);
     };
 
+    const goRoute = () => {
+      router.push(`/slug/`);
+    };
+
     return {
       id,
       rules,
@@ -70,6 +81,7 @@ export default defineComponent({
       isSubmitDisabled,
       validateForm,
       goAPI,
+      goRoute,
     };
   },
 });

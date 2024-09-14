@@ -1,6 +1,6 @@
 <template>
   <v-container class="pa-6 pa-md-12">
-    <h2>動的ルーティングテスト</h2>
+    <h2>動的ルーティングサンプル</h2>
     <v-sheet class="mx-auto" width="500">
       <v-empty-state
         headline="check!!"

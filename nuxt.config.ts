@@ -2,15 +2,12 @@ export default defineNuxtConfig({
   ssr: true,
   nitro: {
     preset: "static",
-    prerender: {
-      routes: ["/"],
-    },
   },
   srcDir: "src/",
   modules: ["@invictus.codes/nuxt-vuetify"],
   runtimeConfig: {
     public: {
-      kurocoApiDomain: "https://mf-suzuki.g.kuroco.app",
+      kurocoApiDomain: process.env.API_KEY,
     },
   },
   app: {
