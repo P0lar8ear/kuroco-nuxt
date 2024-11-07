@@ -5,6 +5,5 @@
       "destination": "/index.html"
     }
   ],
-  "redirects": [],
-  "ip_restrictions": ["60.149.152.228"]
+  "redirects": []
 }
