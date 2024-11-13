@@ -1,7 +1,7 @@
 <template>
   <ClientOnly>
     <v-container class="pa-6 pa-md-12">
-      <h2></h2>
+      <h2>API接続テスト</h2>
       <v-sheet class="mx-auto" width="300">
         <v-list lines="two">
           <v-list-item
@@ -29,7 +29,7 @@
 
 <script setup lang="ts">
 import { ref, watch } from "vue";
-import { fetchFromApi } from "@/utils/api.js";
+import { useRouter, useRuntimeConfig } from "#app";
 
 interface EventItem {
   subject: string;
@@ -48,19 +48,31 @@ interface ResponseData {
 
 const Response = ref<ResponseData | null>(null);
 const page = ref(1);
+const config = useRuntimeConfig();
 
 // データを取得する関数
 const loadDetailData = async (pageNumber) => {
-  const data = await fetchFromApi<ResponseData>("/rcms-api/3/sample_list", {
-    pageID: pageNumber || 1,
-  });
-  Response.value = data;
+  try {
+    const { data, error } = await useFetch<ResponseData>(
+      `${config.public.kurocoApiDomain}/rcms-api/3/sample_list`,
+      {
+        params: { pageID: pageNumber || 1 },
+      }
+    );
+
+    if (error.value) throw error.value;
+    Response.value = data.value || { list: [], pageInfo: { totalCnt: 0 } };
+  } catch (err) {
+    console.error("APIリクエストエラー:", err);
+  }
 };
 
+// `page`が変更されるたびにAPIを再呼び出し
 watch(page, (newPage) => {
   loadDetailData(newPage);
 });
 
+// 初回ロード時のデータ取得
 await loadDetailData(page.value);
 
 const router = useRouter();

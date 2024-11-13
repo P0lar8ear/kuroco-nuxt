@@ -22,17 +22,16 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { ref } from "vue";
 
-// 必要な変数を定義
 const EventResponse = ref({ list: [] });
 const error = ref(null);
 const loading = ref(true);
 
+const config = useRuntimeConfig();
 const router = useRouter();
 
 const fetchEventList = async () => {
-  const config = useRuntimeConfig();
   try {
     loading.value = true;
     const { data, error: fetchError } = await useFetch(
@@ -48,7 +47,7 @@ const fetchEventList = async () => {
   }
 };
 
-onMounted(fetchEventList);
+await fetchEventList();
 
 const goBack = () => {
   router.push(`/`);
