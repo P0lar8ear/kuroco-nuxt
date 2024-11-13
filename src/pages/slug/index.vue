@@ -19,7 +19,6 @@
           v-model="page"
           :length="7"
           :total-visible="Response?.pageInfo.totalCnt || 0"
-          @click="update"
         ></v-pagination>
       </div>
 
@@ -29,8 +28,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
-import { useRouter } from "vue-router";
+import { ref, watch } from "vue";
 import { fetchFromApi } from "@/utils/api.js";
 
 interface EventItem {
@@ -51,16 +49,19 @@ interface ResponseData {
 const Response = ref<ResponseData | null>(null);
 const page = ref(1);
 
-const loadDetailData = async () => {
-  const data = await fetchFromApi<ResponseData>("/rcms-api/3/sample_list");
+// データを取得する関数
+const loadDetailData = async (pageNumber) => {
+  const data = await fetchFromApi<ResponseData>("/rcms-api/3/sample_list", {
+    pageID: pageNumber || 1,
+  });
   Response.value = data;
 };
 
-const update = () => {
-  loadDetailData();
-};
+watch(page, (newPage) => {
+  loadDetailData(newPage);
+});
 
-await loadDetailData();
+await loadDetailData(page.value);
 
 const router = useRouter();
 const goBack = () => {

@@ -5,12 +5,15 @@
       <v-sheet class="mx-auto" width="300">
         <v-list lines="two">
           <v-list-item
-            v-for="n in EventResponse.list"
-            :key="n"
-            :title="'title ' + n.subject"
+            v-for="(item, index) in EventResponse.list"
+            :key="index"
+            :title="'title ' + item.subject"
             subtitle="Load check ok"
           ></v-list-item>
         </v-list>
+
+        <div v-if="loading">データを読み込み中...</div>
+        <div v-if="error">エラーが発生しました: {{ error.message }}</div>
       </v-sheet>
 
       <v-btn variant="tonal" @click="goBack"> ← Back </v-btn>
@@ -19,15 +22,34 @@
 </template>
 
 <script setup lang="ts">
-import { useRoute, useRouter } from "vue-router";
+import { ref, onMounted } from "vue";
 
-const config = useRuntimeConfig();
-const { data: EventResponse } = await useFetch(
-  `${config.public.kurocoApiDomain}/rcms-api/3/token`
-);
+// 必要な変数を定義
+const EventResponse = ref({ list: [] });
+const error = ref(null);
+const loading = ref(true);
 
-const route = useRoute();
 const router = useRouter();
+
+const fetchEventList = async () => {
+  const config = useRuntimeConfig();
+  try {
+    loading.value = true;
+    const { data, error: fetchError } = await useFetch(
+      `${config.public.kurocoApiDomain}/rcms-api/3/sample`
+    );
+    if (fetchError.value) throw fetchError.value;
+    EventResponse.value = data.value || { list: [] };
+  } catch (err) {
+    console.error("APIリクエストエラー:", err);
+    error.value = err;
+  } finally {
+    loading.value = false;
+  }
+};
+
+onMounted(fetchEventList);
+
 const goBack = () => {
   router.push(`/`);
 };

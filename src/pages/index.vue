@@ -32,69 +32,39 @@
       <v-btn class="mt-2" type="submit" block @click="goRoute">go check</v-btn>
     </v-sheet>
   </v-container>
-
-  <v-container class="pa-6 pa-md-12">
-    <h2>静的トークンテスト</h2>
-    <v-sheet class="mx-auto" width="300">
-      <v-btn class="mt-2" type="submit" block @click="goToken">go check</v-btn>
-    </v-sheet>
-  </v-container>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from "vue";
-import { useRouter } from "vue-router";
+<script setup lang="ts">
+const id = ref<number | "">("");
+const isSubmitDisabled = ref<boolean>(true);
+const form = ref(null);
 
-export default defineComponent({
-  setup() {
-    const id = ref<number | "">("");
-    const isSubmitDisabled = ref<boolean>(true);
-    const form = ref(null);
-
-    const rules = [
-      (value: number | ""): boolean | string => {
-        if (value && Number(value)) return true;
-        return "You must enter a valid number.";
-      },
-    ];
-
-    const router = useRouter();
-
-    const validateForm = () => {
-      if (form.value) {
-        isSubmitDisabled.value = !form.value.validate();
-      }
-    };
-
-    const handleSubmit = () => {
-      if (id.value && !isSubmitDisabled.value) {
-        router.push(`/route/${id.value}`);
-      }
-    };
-
-    const goAPI = () => {
-      router.push(`/api/`);
-    };
-
-    const goRoute = () => {
-      router.push(`/slug/`);
-    };
-
-    const goToken = () => {
-      router.push(`/token/`);
-    };
-
-    return {
-      id,
-      rules,
-      handleSubmit,
-      form,
-      isSubmitDisabled,
-      validateForm,
-      goAPI,
-      goRoute,
-      goToken,
-    };
+const rules = [
+  (value: number | ""): boolean | string => {
+    if (value && Number(value)) return true;
+    return "You must enter a valid number.";
   },
-});
+];
+
+const router = useRouter();
+
+const validateForm = () => {
+  if (form.value) {
+    isSubmitDisabled.value = !form.value.validate();
+  }
+};
+
+const handleSubmit = () => {
+  if (id.value && !isSubmitDisabled.value) {
+    router.push(`/route/${id.value}`);
+  }
+};
+
+const goAPI = () => {
+  router.push(`/api/`);
+};
+
+const goRoute = () => {
+  router.push(`/slug/`);
+};
 </script>
