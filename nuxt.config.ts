@@ -1,8 +1,5 @@
 export default defineNuxtConfig({
   ssr: true,
-  nitro: {
-    preset: "static",
-  },
   srcDir: "src/",
   modules: ["@invictus.codes/nuxt-vuetify"],
   runtimeConfig: {

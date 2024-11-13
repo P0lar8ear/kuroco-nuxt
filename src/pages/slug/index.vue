@@ -33,7 +33,6 @@ import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { fetchFromApi } from "@/utils/api.js";
 
-// 型定義
 interface EventItem {
   subject: string;
   slug: string | null;
