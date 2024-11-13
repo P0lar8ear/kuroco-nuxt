@@ -32,6 +32,13 @@
       <v-btn class="mt-2" type="submit" block @click="goRoute">go check</v-btn>
     </v-sheet>
   </v-container>
+
+  <v-container class="pa-6 pa-md-12">
+    <h2>静的トークンテスト</h2>
+    <v-sheet class="mx-auto" width="300">
+      <v-btn class="mt-2" type="submit" block @click="goToken">go check</v-btn>
+    </v-sheet>
+  </v-container>
 </template>
 
 <script lang="ts">
@@ -73,6 +80,10 @@ export default defineComponent({
       router.push(`/slug/`);
     };
 
+    const goToken = () => {
+      router.push(`/token/`);
+    };
+
     return {
       id,
       rules,
@@ -82,6 +93,7 @@ export default defineComponent({
       validateForm,
       goAPI,
       goRoute,
+      goToken,
     };
   },
 });

@@ -1,7 +1,7 @@
 <template>
   <ClientOnly>
     <v-container class="pa-6 pa-md-12">
-      <h2>API接続テスト</h2>
+      <h2>静的トークンテスト</h2>
       <v-sheet class="mx-auto" width="300">
         <v-list lines="two">
           <v-list-item
@@ -19,14 +19,24 @@
 </template>
 
 <script setup lang="ts">
-import { useRoute, useRouter } from "vue-router";
+interface EventItem {
+  subject: string;
+  slug: string | null;
+  topics_id: string | null;
+}
 
+interface EventResponse {
+  list: EventItem[];
+}
 const config = useRuntimeConfig();
-const { data: EventResponse } = await useFetch(
-  `${config.public.kurocoApiDomain}/rcms-api/3/token`
+const { data: EventResponse, error: fetchError } = await useFetch(
+  `${config.public.kurocoApiDomain}/rcms-api/6/token`,
+  {
+    headers: {
+      "x-rcms-api-access-token": config.public.apiAccessToken,
+    },
+  }
 );
-
-const route = useRoute();
 const router = useRouter();
 const goBack = () => {
   router.push(`/`);

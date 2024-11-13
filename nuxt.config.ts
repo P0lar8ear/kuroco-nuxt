@@ -8,6 +8,8 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       kurocoApiDomain: process.env.API_KEY,
+      apiAccessToken:
+        "a03a3a3585a02cd532f14227daa12256a021dbd411fc9b26b2b05aae90f36cd9",
     },
   },
   app: {

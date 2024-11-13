@@ -1,8 +1,4 @@
 <template>
-  <div>test</div>
-</template>
-
-<!-- <template>
   <ClientOnly>
     <v-container class="pa-6 pa-md-12">
       <h2></h2>
@@ -71,4 +67,4 @@ const router = useRouter();
 const goBack = () => {
   router.push(`/`);
 };
-</script> -->
+</script>
