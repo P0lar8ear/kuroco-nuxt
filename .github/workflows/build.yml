@@ -21,7 +21,7 @@ jobs:
       - name: "Get branch name and sha"
         id: get_branch
         run: |
-          PR=$(curl -H "X-Kuroco-Auth: token d44dd2071d2a821bec60e82b280a74f0" https://mf-suzuki.g.kuroco.app/direct/menu/github/?pr=${{ github.event.issue.pull_request.url }})
+          PR=$(curl -H "X-Kuroco-Auth: token d44dd2071d2a821bec60e82b280a74f0" https://deploy-test-suzuki.g.kuroco.app/direct/menu/github/?pr=${{ github.event.issue.pull_request.url }})
           echo "branch=$(echo $PR | jq -r '.ref')" >> $GITHUB_OUTPUT
           echo "sha=$(echo $PR | jq -r '.sha')" >> $GITHUB_OUTPUT
       - name: Checkout Repo
@@ -31,7 +31,7 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18.x'
+          node-version: "18.x"
       - name: Install pnpm
         run: npm install -g pnpm
       - name: CI Cache
@@ -40,7 +40,7 @@ jobs:
         env:
           cache-name: cache-node-modules
         with:
-          path: '**/node_modules'
+          path: "**/node_modules"
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ github.ref_name }}-${{ hashFiles('**/package-lock.json') }}
       - name: Install dependencies
         if: ${{ steps.node_modules_cache_id.outputs.cache-hit != 'true' }}
@@ -61,10 +61,10 @@ jobs:
       - name: Webhook
         uses: diverta/workflow-webhook@v3
         env:
-          webhook_url: "https://mf-suzuki.g.kuroco.app/direct/menu/github/"
+          webhook_url: "https://deploy-test-suzuki.g.kuroco.app/direct/menu/github/"
           webhook_secret: "d44dd2071d2a821bec60e82b280a74f0"
-          data: '{"single_zip":"1","domain":"mf-suzuki.g.kuroco-front.app","pr":"${{ github.event.issue.pull_request.url }}",  "repository":"${{ github.repository }}", "run_id":"${{ github.run_id }}", "hash":"${{ steps.get_branch.outputs.sha }}"}'
-          
+          data: '{"single_zip":"1","domain":"deploy-test-suzuki.g.kuroco-front.app","pr":"${{ github.event.issue.pull_request.url }}",  "repository":"${{ github.repository }}", "run_id":"${{ github.run_id }}", "hash":"${{ steps.get_branch.outputs.sha }}"}'
+
   #for Push
   pushed_build:
     name: Build(pushed)
@@ -76,7 +76,7 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18.x'
+          node-version: "18.x"
       - name: Install pnpm
         run: npm install -g pnpm
       - name: CI Cache
@@ -85,7 +85,7 @@ jobs:
         env:
           cache-name: cache-node-modules
         with:
-          path: '**/node_modules'
+          path: "**/node_modules"
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ github.ref_name }}-${{ hashFiles('**/package-lock.json') }}
       - name: Install dependencies
         if: ${{ steps.node_modules_cache_id.outputs.cache-hit != 'true' }}
@@ -104,6 +104,6 @@ jobs:
       - name: Webhook
         uses: diverta/workflow-webhook@v3
         env:
-          webhook_url: "https://mf-suzuki.g.kuroco.app/direct/menu/github/"
+          webhook_url: "https://deploy-test-suzuki.g.kuroco.app/direct/menu/github/"
           webhook_secret: "d44dd2071d2a821bec60e82b280a74f0"
-          data: '{"single_zip":"1","domain":"mf-suzuki.g.kuroco-front.app", "repository":"${{ github.repository }}", "run_id":"${{ github.run_id }}", "hash":"${{ github.sha }}"}'
+          data: '{"single_zip":"1","domain":"deploy-test-suzuki.g.kuroco-front.app", "repository":"${{ github.repository }}", "run_id":"${{ github.run_id }}", "hash":"${{ github.sha }}"}'
