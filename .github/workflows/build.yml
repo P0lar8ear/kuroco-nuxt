@@ -19,8 +19,10 @@ jobs:
       - name: Print environment variables
         run: |
           echo "TEST_CODE: ${{ secrets.TEST_CODE }}"
+          echo "TEST_CODE: ${{ vars.VARIABLES_CODE }}"
 
-          if [ -z "${{ secrets.TEST_COD }}" ]; then
+
+          if [ -z "${{ vars.VARIABLES_CODED }}" ]; then
             echo "TEST_CODE is not set"
           else
             echo "TEST_CODE is set"
