@@ -12,6 +12,20 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  check_env_vars:
+    name: Check environment variables
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print environment variables
+        run: |
+          echo "TEST_CODE: ${{ secrets.TEST_CODE }}"
+
+          if [ -z "${{ secrets.TEST_COD }}" ]; then
+            echo "TEST_CODE is not set"
+          else
+            echo "TEST_CODE is set"
+          fi
+
   # for Pull Request (exclude merged)
   pullreq_build:
     name: Build(pullreq)
